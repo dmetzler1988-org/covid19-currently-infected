@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Corona Currently Infected Calculator</title>
+
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+
+  <body>
+    <div class="input-area">
+      <label for="inputCountrySel">Choose your country</label>
+      <select id="inputCountrySel">
+        <option value="global">Global</option>
+        <option value="switzerland" selected="selected">Switzerland</option>
+        <option value="austria">Austria</option>
+        <option value="germany">Germany</option>
+        <option value="italy">Italy</option>
+        <option value="spain">Spain</option>
+        <option value="france">France</option>
+        <option value="united-states">USA</option>
+        <option value="united-kingdom">UK</option>
+        <option value="china">China</option>
+        <option value="japan">Japan</option>
+      </select>
+      <label for="inputCountry">or type in your country</label>
+      <input id="inputCountry" type="text" placeholder="Country" />
+
+      <div class="information-text">
+        If both are filled, the input field has priority
+      </div>
+
+      <button id="start" type="button">Submit</button>
+    </div>
+
+    <div id="output"></div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
