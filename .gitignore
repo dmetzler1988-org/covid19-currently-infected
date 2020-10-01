@@ -13,3 +13,6 @@ Icon
 ### Tools ###
 .vscode/*
 .idea
+
+### Custom ###
+node_modules
