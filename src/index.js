@@ -1,5 +1,5 @@
-import { covid } from "./covid.js";
 import { populations } from "./population.js";
+import { covid } from "./covid.js";
 
-covid();
 populations();
+covid();
