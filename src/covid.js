@@ -1,4 +1,7 @@
 export function covid() {
+    const influenzaInfectedGlobalYearlyPercentage = 20;
+    const influenzaDeathsGlobalYearly = 650000;
+
     async function fetchAsync(url) {
         let response = await fetch(url);
         let data = await response.json();
@@ -30,10 +33,10 @@ export function covid() {
         for (const [key, value] of populationMap.entries()) {
             if (key.toLowerCase().startsWith(populationCountry.toLowerCase())) {
                 countryPopulation = value.replace(/,/g, "");
-                confirmedPercentage = (confirmedCases / countryPopulation).toFixed(12) + "%";
-                deathPercentage = (deathCases / countryPopulation).toFixed(12) + "%";
-                recoveredPercentage = (recoveredCases / countryPopulation).toFixed(12) + "%";
-                currentlyInfectedPercentage = (currentlyInfected / countryPopulation).toFixed(12) + "%";
+                confirmedPercentage = (confirmedCases / countryPopulation * 100).toFixed(12) + "%";
+                deathPercentage = (deathCases / countryPopulation * 100).toFixed(12) + "%";
+                recoveredPercentage = (recoveredCases / countryPopulation * 100).toFixed(12) + "%";
+                currentlyInfectedPercentage = (currentlyInfected / countryPopulation * 100).toFixed(12) + "%";
             }
         }
 
@@ -41,10 +44,29 @@ export function covid() {
           <strong>${country}:</strong></br>
           Total population: ${formatNumber(countryPopulation)}</br>
           Confirmed Cases: ${formatNumber(confirmedCases)} <c>(${confirmedPercentage} of population)</c></br>
-          Deaths Cases: ${formatNumber(deathCases)} <c>(${deathPercentage} of population)</c></br>
+          Death Cases: ${formatNumber(deathCases)} <c>(${deathPercentage} of population)</c></br>
           Recovered Cases: ${formatNumber(recoveredCases)} <c>(${recoveredPercentage} of population)</c></br>
           </br>
           Currently infected: ${formatNumber(currentlyInfected)} <c>(${currentlyInfectedPercentage} of population)</c>`;
+
+        if (country === "Global") {
+            const fluInfected = (countryPopulation / 100) * influenzaInfectedGlobalYearlyPercentage;
+            const fluDeathsPercentage = ((influenzaDeathsGlobalYearly / countryPopulation) * 100).toFixed(12) + "%";
+
+            document.getElementById("output").innerHTML += `
+                </br></br>
+                <strong>${country} Influenza Yearly:</strong></br>
+                Infected Cases: ~ ${formatNumber(fluInfected)} <c>(~ 20% of population)</c></br>
+                Death Cases: ~ ${formatNumber(influenzaDeathsGlobalYearly)} <c>(~ ${fluDeathsPercentage} of population)</c>`;
+
+            const fluCovidDiffInfected = confirmedCases - fluInfected;
+            const fluCovidDiffDeaths = deathCases - influenzaDeathsGlobalYearly;
+            document.getElementById("output").innerHTML += `
+                </br></br>
+                <strong>Diff COVID-19 vs. Influenza:</strong></br>
+                Infected Cases: ~ ${formatNumber(fluCovidDiffInfected)}</br>
+                Death Cases: ~ ${formatNumber(fluCovidDiffDeaths)}`;
+        }
     }
 
     function getGlobal() {
