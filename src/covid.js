@@ -40,7 +40,8 @@ export function covid() {
             }
         }
 
-        document.getElementById("output").innerHTML = `
+        document.getElementById("output").innerHTML += `
+          <div><div class="inner">
           <strong>${country}:</strong></br>
           Total population: ${formatNumber(countryPopulation)}</br>
           Confirmed Cases: ${formatNumber(confirmedCases)} <c>(${confirmedPercentage} of population)</c></br>
@@ -67,6 +68,8 @@ export function covid() {
                 Infected Cases: ~ ${formatNumber(fluCovidDiffInfected)}</br>
                 Death Cases: ~ ${formatNumber(fluCovidDiffDeaths)}`;
         }
+
+        document.getElementById("output").innerHTML += `</div></div>`;
     }
 
     function getGlobal() {

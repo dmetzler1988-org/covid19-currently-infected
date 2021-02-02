@@ -16,6 +16,39 @@ label {
   color: black;
 }
 
+.buttons-wrapper {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.buttons-wrapper > button {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 8px 8px;
+}
+
+.buttons-wrapper > button:first-child {
+  margin-left: 0;
+}
+
+#output > div {
+  margin-bottom: 20px;
+}
+
+#output div.inner {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 10px 10px 0;
+}
+
+#output div.inner:nth-child(even) {
+  background: #efefef;
+}
+
+#output div.inner:nth-child(odd) {
+  background: #efefef;
+}
+
 c {
   font-size: 11px;
   color: gray;
