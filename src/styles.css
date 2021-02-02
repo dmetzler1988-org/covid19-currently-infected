@@ -1,4 +1,5 @@
 body {
+  position: relative;
   font-family: sans-serif;
 }
 
@@ -15,12 +16,28 @@ label {
   color: black;
 }
 
+c {
+  font-size: 11px;
+  color: gray;
+}
+
 .input-area {
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 
 .information-text {
   font-size: 10px;
   color: darkgray;
   padding-bottom: 20px;
+}
+
+.is-hidden {
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
