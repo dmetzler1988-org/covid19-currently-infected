@@ -39,7 +39,7 @@ export function covid() {
 
   function getCases(result) {
     const data = result[result.length - 1];
-    let cases;
+    let cases = -1;
     if (typeof data !== "undefined") {
       cases = data.Cases;
     }
@@ -73,11 +73,10 @@ export function covid() {
           const deathCases = getCases(results[1]);
           const recoveredCases = getCases(results[2]);
 
-          if (confirmedCases && deathCases && recoveredCases) {
+          if (confirmedCases !== -1 && deathCases !== -1 && recoveredCases !== -1) {
             calcAndOutput(country, confirmedCases, deathCases, recoveredCases);
           } else {
-            document.getElementById("output").innerHTML =
-              "Country is not valid";
+            document.getElementById("output").innerHTML = "Some values are not given.";
             return;
           }
         } else {
