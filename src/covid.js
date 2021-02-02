@@ -85,12 +85,29 @@ export function covid() {
         });
     }
 
-    function getCases(result) {
-        const data = result[result.length - 1];
+    /**
+     * Recursive function: If no cases in last element are available, check previous element.
+     *
+     * @param {array} result
+     * @param {int} counter
+     *
+     * @returns {*|number}
+     */
+    function getCases(result, counter) {
+        if (typeof counter === "undefined") {
+            counter = 1;
+        }
+
+        let data = result[result.length - counter];
         let cases = -1;
         if (typeof data !== "undefined") {
             cases = data.Cases;
         }
+
+        // Currently deactivated - because what if, when really no cases exist for this country?
+        /*if (cases === 0) {
+            return getCases(result, counter+1);
+        }*/
 
         return cases;
     }
