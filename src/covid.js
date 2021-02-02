@@ -76,13 +76,18 @@ export function covid() {
         Promise.all([datas]).then((results) => {
             const result = results[0];
 
-            calcAndOutput("Global", result.TotalConfirmed, result.TotalDeaths, result.TotalRecovered);
+            calcAndOutput(
+                "Global",
+                result.TotalConfirmed,
+                result.TotalDeaths,
+                result.TotalRecovered
+            );
         });
     }
 
     function getCases(result) {
         const data = result[result.length - 1];
-        let cases;
+        let cases = -1;
         if (typeof data !== "undefined") {
             cases = data.Cases;
         }
@@ -91,9 +96,10 @@ export function covid() {
     }
 
     function getByCountry(country) {
-        const confirmedUrl = `https://api.covid19api.com/total/country/${country}/status/confirmed?from=2020-01-01T00:00:00Z&to=2020-12-31T23:59:59Z`;
-        const deathsUrl = `https://api.covid19api.com/total/country/${country}/status/deaths?from=2020-01-01T00:00:00Z&to=2020-12-31T23:59:59Z`;
-        const recoveredUrl = `https://api.covid19api.com/total/country/${country}/status/recovered?from=2020-01-01T00:00:00Z&to=2020-12-31T23:59:59Z`;
+        const currentYear = new Date().getFullYear();
+        const confirmedUrl = `https://api.covid19api.com/total/country/${country}/status/confirmed?from=2020-01-01T00:00:00Z&to=${currentYear}-12-31T23:59:59Z`;
+        const deathsUrl = `https://api.covid19api.com/total/country/${country}/status/deaths?from=2020-01-01T00:00:00Z&to=${currentYear}-12-31T23:59:59Z`;
+        const recoveredUrl = `https://api.covid19api.com/total/country/${country}/status/recovered?from=2020-01-01T00:00:00Z&to=${currentYear}-12-31T23:59:59Z`;
 
         const confirmedDatas = fetchAsync(confirmedUrl);
         const deathsDatas = fetchAsync(deathsUrl);
@@ -101,10 +107,7 @@ export function covid() {
 
         Promise.all([confirmedDatas, deathsDatas, recoveredDatas]).then(
             (results) => {
-                if (
-                    (results[0] && results[0].message !== "Not Found")
-                    || (typeof results[0] !== "undefined" && results[0].length > 0)
-                ) {
+                if ((results[0] && results[0].message !== "Not Found") || (typeof results[0] !== "undefined" && results[0].length > 0)) {
                     const firstResult = results[0];
                     const data = firstResult[firstResult.length - 1];
                     let country;
@@ -116,10 +119,10 @@ export function covid() {
                     const deathCases = getCases(results[1]);
                     const recoveredCases = getCases(results[2]);
 
-                    if (confirmedCases && deathCases && recoveredCases) {
+                    if (confirmedCases !== -1 && deathCases !== -1 && recoveredCases !== -1) {
                         calcAndOutput(country, confirmedCases, deathCases, recoveredCases);
                     } else {
-                        document.getElementById("output").innerHTML = "Country is not valid";
+                        document.getElementById("output").innerHTML = "Some values are not given.";
                         return;
                     }
                 } else {
