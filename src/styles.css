@@ -31,6 +31,14 @@ label {
   margin-left: 0;
 }
 
+#output strong.country {
+  display: inline-block;
+  vertical-align: top;
+  padding-bottom: 5px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
 #output > div {
   margin-bottom: 20px;
 }

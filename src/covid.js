@@ -40,9 +40,9 @@ export function covid() {
             }
         }
 
-        document.getElementById("output").innerHTML += `
+        let $outputHtml = `
           <div><div class="inner">
-          <strong>${country}:</strong></br>
+          <strong class="country">${country}:</strong></br>
           Total population: ${formatNumber(countryPopulation)}</br>
           Confirmed Cases: ${formatNumber(confirmedCases)} <c>(${confirmedPercentage} of population)</c></br>
           Death Cases: ${formatNumber(deathCases)} <c>(${deathPercentage} of population)</c></br>
@@ -54,7 +54,7 @@ export function covid() {
             const fluInfected = (countryPopulation / 100) * influenzaInfectedGlobalYearlyPercentage;
             const fluDeathsPercentage = ((influenzaDeathsGlobalYearly / countryPopulation) * 100).toFixed(12) + "%";
 
-            document.getElementById("output").innerHTML += `
+            $outputHtml += `
                 </br></br>
                 <strong>${country} Influenza Yearly:</strong></br>
                 Infected Cases: ~ ${formatNumber(fluInfected)} <c>(~ 20% of population)</c></br>
@@ -62,14 +62,15 @@ export function covid() {
 
             const fluCovidDiffInfected = confirmedCases - fluInfected;
             const fluCovidDiffDeaths = deathCases - influenzaDeathsGlobalYearly;
-            document.getElementById("output").innerHTML += `
+            $outputHtml += `
                 </br></br>
                 <strong>Diff COVID-19 vs. Influenza:</strong></br>
                 Infected Cases: ~ ${formatNumber(fluCovidDiffInfected)}</br>
                 Death Cases: ~ ${formatNumber(fluCovidDiffDeaths)}`;
         }
 
-        document.getElementById("output").innerHTML += `</div></div>`;
+        $outputHtml += `</div></div>`;
+        document.getElementById("output").innerHTML += $outputHtml;
     }
 
     function getGlobal() {
