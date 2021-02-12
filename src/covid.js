@@ -40,36 +40,61 @@ export function covid() {
             }
         }
 
-        document.getElementById("output").innerHTML += `
-          <div><div class="inner">
-          <strong>${country}:</strong></br>
-          Total population: ${formatNumber(countryPopulation)}</br>
-          Confirmed Cases: ${formatNumber(confirmedCases)} <c>(${confirmedPercentage} of population)</c></br>
-          Death Cases: ${formatNumber(deathCases)} <c>(${deathPercentage} of population)</c></br>
-          Recovered Cases: ${formatNumber(recoveredCases)} <c>(${recoveredPercentage} of population)</c></br>
-          </br>
-          Currently infected: ${formatNumber(currentlyInfected)} <c>(${currentlyInfectedPercentage} of population)</c>`;
+        let $outputHtml = `
+            <div><div class="inner">
+                <div><strong class="country">${country}:</strong></div>
+                <div class="flex-container">
+                    <span class="flex-item">Total population: ${formatNumber(countryPopulation)}</span>
+                </div>
+                <div class="flex-container">
+                    <span class="flex-item">Confirmed Cases: ${formatNumber(confirmedCases)}</span>
+                    <c class="flex-item">(${confirmedPercentage} of population)</c>
+                </div>
+                <div class="flex-container">
+                    <span class="flex-item">Death Cases: ${formatNumber(deathCases)}</span>
+                    <c class="flex-item">(${deathPercentage} of population)</c>
+                </div>
+                <div class="flex-container">
+                    <span class="flex-item">Recovered Cases: ${formatNumber(recoveredCases)}</span>
+                    <c class="flex-item">(${recoveredPercentage} of population)</c>
+                </div>
+                </br>
+                <div class="flex-container">
+                    <span class="flex-item">Currently infected: ${formatNumber(currentlyInfected)}</span>
+                    <c class="flex-item">(${currentlyInfectedPercentage} of population)</c>
+                </div>`;
 
         if (country === "Global") {
             const fluInfected = (countryPopulation / 100) * influenzaInfectedGlobalYearlyPercentage;
             const fluDeathsPercentage = ((influenzaDeathsGlobalYearly / countryPopulation) * 100).toFixed(12) + "%";
 
-            document.getElementById("output").innerHTML += `
+            $outputHtml += `
                 </br></br>
-                <strong>${country} Influenza Yearly:</strong></br>
-                Infected Cases: ~ ${formatNumber(fluInfected)} <c>(~ 20% of population)</c></br>
-                Death Cases: ~ ${formatNumber(influenzaDeathsGlobalYearly)} <c>(~ ${fluDeathsPercentage} of population)</c>`;
+                <div><strong>${country} Influenza Yearly:</strong></div>
+                <div class="flex-container">
+                    <span class="flex-item">Infected Cases: ~ ${formatNumber(fluInfected)}</span>
+                    <c class="flex-item">(~ 20% of population)</c>
+                </div>
+                <div class="flex-container">
+                    <span class="flex-item">Death Cases: ~ ${formatNumber(influenzaDeathsGlobalYearly)}</span>
+                    <c class="flex-item"(~ ${fluDeathsPercentage} of population)</c>
+                </div>`;
 
             const fluCovidDiffInfected = confirmedCases - fluInfected;
             const fluCovidDiffDeaths = deathCases - influenzaDeathsGlobalYearly;
-            document.getElementById("output").innerHTML += `
+            $outputHtml += `
                 </br></br>
-                <strong>Diff COVID-19 vs. Influenza:</strong></br>
-                Infected Cases: ~ ${formatNumber(fluCovidDiffInfected)}</br>
-                Death Cases: ~ ${formatNumber(fluCovidDiffDeaths)}`;
+                <div><strong>Diff COVID-19 vs. Influenza:</strong></div>
+                <div class="flex-container">
+                    <span class="flex-item">Infected Cases: ~ ${formatNumber(fluCovidDiffInfected)}</span>
+                </div>
+                <div class="flex-container">
+                    <span class="flex-item">Death Cases: ~ ${formatNumber(fluCovidDiffDeaths)}</span>
+                </div>`;
         }
 
-        document.getElementById("output").innerHTML += `</div></div>`;
+        $outputHtml += `</div></div>`;
+        document.getElementById("output").innerHTML += $outputHtml;
     }
 
     function getGlobal() {

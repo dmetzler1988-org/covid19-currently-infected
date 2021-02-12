@@ -1,76 +1,133 @@
+html, body {
+    height: 100%;
+}
+
 body {
-  position: relative;
-  font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 label,
 input,
 select,
 button {
-  display: block;
-  margin-bottom: 8px;
+    display: block;
+    margin-bottom: 8px;
 }
 
 label {
-  font-size: 12px;
-  color: black;
+    font-size: 14px;
+    color: black;
+}
+
+.content {
+    flex: 1 0 auto;
+    margin: 20px 20px 0;
 }
 
 .buttons-wrapper {
-  display: block;
-  margin-bottom: 8px;
+    display: block;
+    margin-bottom: 8px;
 }
 
 .buttons-wrapper > button {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 0 8px 8px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 8px 8px;
 }
 
 .buttons-wrapper > button:first-child {
-  margin-left: 0;
+    margin-left: 0;
+}
+
+#output strong.country {
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom: 5px;
+    font-size: 18px;
+    line-height: 24px;
 }
 
 #output > div {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 #output div.inner {
-  display: inline-block;
-  vertical-align: top;
-  padding: 10px 10px 10px 0;
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px 10px 10px 0;
 }
 
 #output div.inner:nth-child(even) {
-  background: #efefef;
+    background: #efefef;
 }
 
 #output div.inner:nth-child(odd) {
-  background: #efefef;
+    background: #efefef;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: stretch;
+}
+
+.flex-container .flex-item {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    padding-left: 8px;
+}
+
+.flex-container .flex-item:first-child {
+    padding-left: 0;
 }
 
 c {
-  font-size: 11px;
-  color: gray;
+    font-size: 11px;
+    color: gray;
 }
 
 .input-area {
-  padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .information-text {
-  font-size: 10px;
-  color: darkgray;
-  padding-bottom: 20px;
+    font-size: 10px;
+    color: darkgray;
+    padding-bottom: 20px;
 }
 
 .is-hidden {
-  visibility: hidden !important;
-  width: 0 !important;
-  height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  position: absolute;
-  top: 0;
-  right: 0;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+footer {
+    flex-shrink: 0;
+    padding: 20px;
+}
+
+footer .attribute {
+    font-size: 10px;
+    line-height: 14px;
+    color: #a9a9a9;
+}
+
+footer .attribute a {
+    color: #a9a9a9;
 }
